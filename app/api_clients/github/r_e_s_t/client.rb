@@ -7,7 +7,17 @@ module Github
       end
       
       def fetch_repos
-        get_url(url: '/users/mikeyduece/repos?sort=updated_at&direction=desc')
+        page_number = 1
+        repos = []
+        loop do
+          repo_return = get_url(url: "/users/mikeyduece/repos?sort=updated_at&direction=desc&page=#{page_number}")
+          break if repo_return.empty?
+          
+          repos << repo_return
+          page_number += 1
+        end
+        
+        repos.flatten
       end
       
       private
@@ -25,7 +35,7 @@ module Github
           faraday.adapter Faraday.default_adapter
         end
       end
-      
+    
     end
   end
 end
