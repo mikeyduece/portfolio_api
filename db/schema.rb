@@ -16,13 +16,11 @@ ActiveRecord::Schema.define(version: 2020_04_03_132721) do
   enable_extension "plpgsql"
 
   create_table "languages", force: :cascade do |t|
-    t.bigint "repo_id"
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "total_bytes", default: 0
     t.index ["name"], name: "index_languages_on_name"
-    t.index ["repo_id"], name: "index_languages_on_repo_id"
     t.index ["total_bytes"], name: "index_languages_on_total_bytes"
   end
 
@@ -35,5 +33,4 @@ ActiveRecord::Schema.define(version: 2020_04_03_132721) do
     t.index ["uuid"], name: "index_repos_on_uuid"
   end
 
-  add_foreign_key "languages", "repos"
 end
