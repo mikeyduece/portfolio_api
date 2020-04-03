@@ -10,7 +10,7 @@ class Language < ApplicationRecord
       ORDER BY percentage DESC
     SQL
     
-    connection.execute(sql)
+    connection.execute(sql).values.to_h
   }
   
   def update_total_bytes(bytes)
