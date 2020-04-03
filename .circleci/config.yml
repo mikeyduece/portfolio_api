@@ -1,0 +1,43 @@
+version: 2
+jobs:
+  build:
+    parallelism: 3
+    working_directory: ~/portfolio_api
+    docker:
+      - image: circleci/ruby:2.6.3
+        environment:
+          PGHOST: localhost
+          PGUSER: portfolio_api
+          RAILS_ENV: test
+      - image: postgres:12
+        environment:
+          POSTGRES_USER: portfolio_api
+          POSTGRES_DB: portfolio_api_test
+          POSTGRES_HOST_AUTH_METHOD: trust
+    steps:
+      - checkout
+      # Restore Cached Dependencies
+      - type: cache-restore
+        name: Restore bundle cache
+        key: portfolio_api-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Configure Bundler
+          command:
+            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
+            source $BASH_ENV
+            gem install bundler
+
+      # Bundle Install Dependencies
+      - run: bundle install --path vendor/bundle
+      # Cache dependencies
+      - type: cache-save
+        name: Store bundle cache
+        key: portfolio_api-{{ checksum "Gemfile.lock" }}
+        paths:
+          - vendor/bundle
+      # Wait for DB
+      - run: dockerize -wait tcp://localhost:5432 -timeout 1m
+      # Setup database
+      - run: bundle exec rake db:{drop,create,migrate,seed}
+      # Run tests
+      - run: bundle exec rake
