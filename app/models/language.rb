@@ -10,7 +10,13 @@ class Language < ApplicationRecord
       ORDER BY percentage DESC
     SQL
     
-    connection.execute(sql).values.to_h
+    connection.execute(sql).values
+  }
+  
+  scope :formatted_percentages, ->{
+    grouped_percentages.each_with_object({}) do |array, acc|
+      acc[array.first] = (array.last * 100).round(2)
+    end
   }
   
   def update_total_bytes(bytes)
