@@ -6,7 +6,7 @@ namespace :scheduler do
   
   desc 'Fetch repos'
   task fetch_repos: :environment do
-    Github::RepoWorker.perform_asyn
+    Github::RepoWorker.perform_async
   end
 
 end
