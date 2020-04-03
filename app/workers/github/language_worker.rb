@@ -1,5 +1,5 @@
 module Github
-  class LanguageWorker
+  class LanguageWorker < BaseWorker
     include Sidekiq::Worker
     sidekiq_options retry: true, count: 3
     
@@ -8,10 +8,6 @@ module Github
     end
     
     private
-    
-    def client
-      @client ||= Github::REST::Client.new
-    end
     
     def fetch_languages
       repo_names.each do |repo_name|
@@ -26,7 +22,7 @@ module Github
     
     def update_languages_total_bytes(languages)
       languages.each do |language_name, bytes|
-        language = Language.find_by(name: language_name)
+        language = Language.find_or_create_by(name: language_name)
 
         language.update_total_bytes(bytes)
       end
