@@ -1,0 +1,9 @@
+<mj-section>
+  <mj-column>
+    <mj-text>
+      <%= @body %>
+
+      From: <%= @name %>
+    </mj-text>
+  </mj-column>
+</mj-section>
