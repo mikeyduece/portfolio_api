@@ -3,7 +3,11 @@ module Github
     class Client
       
       def languages_for_repo(repo)
-        get_url(url: "/#{repo}/languages")
+        get_url(url: "/repos/mikeyduece/#{repo}/languages")
+      end
+      
+      def fetch_repos
+        get_url(url: '/users/mikeyduece/repos?sort=updated_at&direction=desc')
       end
       
       private
@@ -14,10 +18,9 @@ module Github
       end
       
       def connection
-        #faraday.authorization :token, User.find_by_nickname(user).token
-        @connection ||= Faraday.new(url: 'https://api.github.com/repos/mikeyduece') do |faraday|
+        @connection ||= Faraday.new(url: 'https://api.github.com') do |faraday|
           faraday.headers['Accept'] = 'application/vnd.github.cloak-preview+json'
-          faraday.headers['X-API-KEY'] = ENV['GITHUB_API_KEY']
+          #faraday.headers['X-API-KEY'] = ENV['GITHUB_API_KEY']
           
           faraday.adapter Faraday.default_adapter
         end
