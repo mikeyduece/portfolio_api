@@ -21,9 +21,11 @@ gem 'mjml-rails'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
+
 gem 'jquery-rails'
 gem 'database_cleaner'
 gem 'faraday'
+gem 'rack-cors'
 gem 'figaro'
 gem 'codecov'
 gem 'sidekiq'
