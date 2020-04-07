@@ -1,4 +1,6 @@
 class Language < ApplicationRecord
+  has_many :repo_languages, inverse_of: :language
+  has_many :repos
   
   validates :name, :total_bytes, presence: true, uniqueness: true
   validates :total_bytes, numericality: { greater_than_or_equal_to: 0 }

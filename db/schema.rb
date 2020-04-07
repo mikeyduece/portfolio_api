@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_03_160243) do
+ActiveRecord::Schema.define(version: 2020_04_07_223550) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,16 @@ ActiveRecord::Schema.define(version: 2020_04_03_160243) do
     t.index ["total_bytes"], name: "index_languages_on_total_bytes"
   end
 
+  create_table "repo_languages", force: :cascade do |t|
+    t.bigint "repo_id", null: false
+    t.bigint "language_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["language_id"], name: "index_repo_languages_on_language_id"
+    t.index ["repo_id", "language_id"], name: "index_repo_languages_on_repo_id_and_language_id", unique: true
+    t.index ["repo_id"], name: "index_repo_languages_on_repo_id"
+  end
+
   create_table "repos", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -33,4 +43,6 @@ ActiveRecord::Schema.define(version: 2020_04_03_160243) do
     t.index ["github_id"], name: "index_repos_on_github_id"
   end
 
+  add_foreign_key "repo_languages", "languages"
+  add_foreign_key "repo_languages", "repos"
 end
