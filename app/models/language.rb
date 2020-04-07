@@ -13,10 +13,17 @@ class Language < ApplicationRecord
     connection.execute(sql).values
   }
   
-  scope :formatted_percentages, ->{
+  scope :formatted_percentages, -> {
     grouped_percentages.each_with_object({}) do |array, acc|
-      acc[array.first] = (array.last * 100).round(2)
-    end
+      next if array.last.zero?
+
+      language_name = array.first
+      acc[array.first] = {
+        name: language_name,
+        value: (array.last * 100).round,
+        color: Api::LANGUAGES[language_name.to_sym][:color]
+      }
+    end.values
   }
   
   def update_total_bytes(bytes)
@@ -32,5 +39,5 @@ class Language < ApplicationRecord
   def summed_total_bytes
     Language.sum(:total_bytes)
   end
-  
+
 end
