@@ -20,7 +20,7 @@ class Language < ApplicationRecord
       language_name = array.first
       acc[array.first] = {
         name: language_name,
-        value: (array.last * 100).round,
+        value: (array.last * 100).round(2),
         color: Api::LANGUAGES[language_name.to_sym][:color]
       }
     end.values
