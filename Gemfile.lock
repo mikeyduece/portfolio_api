@@ -109,6 +109,12 @@ GEM
     json (2.3.0)
     launchy (2.5.0)
       addressable (~> 2.7)
+    letter_opener (1.7.0)
+      launchy (~> 2.2)
+    letter_opener_web (1.4.0)
+      actionmailer (>= 3.2)
+      letter_opener (~> 1.0)
+      railties (>= 3.2)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -125,6 +131,7 @@ GEM
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.14.0)
+    mjml-rails (4.3.2)
     msgpack (1.3.3)
     multipart-post (2.1.1)
     nio4r (2.5.2)
@@ -140,6 +147,8 @@ GEM
     puma (4.3.3)
       nio4r (~> 2.0)
     rack (2.2.2)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-protection (2.0.8.1)
       rack
     rack-proxy (0.6.5)
@@ -196,6 +205,7 @@ GEM
       rspec-support (~> 3.9)
     rspec-support (3.9.2)
     ruby_dep (1.5.0)
+    ruby_http_client (3.5.0)
     safe_yaml (1.0.5)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
@@ -207,6 +217,8 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    sendgrid-ruby (6.1.3)
+      ruby_http_client (~> 3.4)
     shoulda-matchers (4.3.0)
       activesupport (>= 4.2.0)
     sidekiq (6.0.5)
@@ -274,14 +286,18 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   jquery-rails
   launchy
+  letter_opener_web
   listen (>= 3.0.5, < 3.2)
+  mjml-rails
   pg (>= 0.18, < 2.0)
   pry-rails
   puma (~> 4.1)
+  rack-cors
   rails (~> 6.0.2, >= 6.0.2.2)
   redis (~> 4.0)
   rspec-rails
   sass-rails (>= 6)
+  sendgrid-ruby
   shoulda-matchers
   sidekiq
   spring

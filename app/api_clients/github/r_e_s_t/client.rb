@@ -30,7 +30,7 @@ module Github
       def connection
         @connection ||= Faraday.new(url: 'https://api.github.com') do |faraday|
           faraday.headers['Accept'] = 'application/vnd.github.cloak-preview+json'
-          #faraday.headers['X-API-KEY'] = ENV['GITHUB_API_KEY']
+          faraday.headers['Authorization'] = "token #{ENV['GITHUB_ACCESS_KEY']}"
           
           faraday.adapter Faraday.default_adapter
         end

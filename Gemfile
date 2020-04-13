@@ -11,8 +11,9 @@ gem 'webpacker', '~> 4.0'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
- gem 'redis', '~> 4.0'
+gem 'redis', '~> 4.0'
 
+gem 'mjml-rails'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
@@ -20,12 +21,15 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
+
 gem 'jquery-rails'
 gem 'database_cleaner'
 gem 'faraday'
+gem 'rack-cors'
 gem 'figaro'
 gem 'codecov'
 gem 'sidekiq'
+gem 'sendgrid-ruby'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -42,6 +46,7 @@ end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
+  gem "letter_opener_web"
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
