@@ -9,6 +9,7 @@ class Language < ApplicationRecord
     sql = <<~SQL
       SELECT name, (total_bytes::double precision / SUM(total_bytes) OVER ()) AS percentage
       FROM languages
+      WHERE name <> 'CoffeeScript'
       ORDER BY percentage DESC
     SQL
     
