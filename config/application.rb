@@ -35,8 +35,9 @@ module PortfolioApi
     # Set Allowed CORS Origin with accepted methods
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins 'http://localhost:3000', 'https://heft-portfolio-development.herokuapp.com',
-                'https://heft-portfolio-staging.herokuapp.com', 'http://heft-portfolio-production.herokuapp.com'
+        origins '*'
+        # origins 'http://localhost:3000', 'https://heft-portfolio-development.herokuapp.com',
+        #         'https://heft-portfolio-staging.herokuapp.com', 'http://heft-portfolio-production.herokuapp.com'
         resource '*', headers: :any, methods: [:get, :post, :options]
       end
     end
