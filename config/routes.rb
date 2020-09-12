@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  
+
   mount LetterOpenerWeb::Engine, at: "/letter_opener_web" if Rails.env.development?
   root to: 'home#index'
-  
+  mount ActionCable.server => '/cable'
+
   namespace :api do
     namespace :v1 do
       resources :languages, module: :languages, only: :index

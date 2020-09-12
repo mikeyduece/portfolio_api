@@ -3,4 +3,5 @@ class Repo < ApplicationRecord
   has_many :languages, through: :repo_languages
   
   validates :github_id, :name, uniqueness: true, presence: true
+
 end

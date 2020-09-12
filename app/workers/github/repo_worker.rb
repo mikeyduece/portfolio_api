@@ -1,8 +1,6 @@
 module Github
   class RepoWorker < BaseWorker
-    include Sidekiq::Worker
-    sidekiq_options retry: true, count: 3
-    
+
     def perform
       find_or_create_repos
     end
